@@ -44,6 +44,10 @@ ActiveRecord::Schema.define(version: 2019_06_01_071650) do
     t.boolean "introduction_code_is", default: false
     t.text "self"
     t.boolean "self_is", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "seminar_users", "seminars"
+  add_foreign_key "seminar_users", "users"
 end

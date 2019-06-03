@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.boolean "introduction_code_is" , default: 0
       t.text "self"
       t.boolean "self_is" , default: false
+      t.timestamps
     end
   end
 end
