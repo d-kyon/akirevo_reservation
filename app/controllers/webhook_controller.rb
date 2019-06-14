@@ -21,13 +21,27 @@ class WebhookController < ApplicationController
           messages=[]
           if event.message['text']=='申し込む' && user.nil?
             User.create!(line_id:event['source']['userId'])
-            template("申し込みありがとうございます。
-まずはお名前を漢字で入力してください。",messages,event)
-            
+            seminar_date(Seminar.all,messages,event)
           else
             if user.nil? then
               apply(messages,event)
-
+              
+            elsif user.seminar_users.empty? then
+              SeminarUser.create!(user_id:user.id,seminar_id:event.message['text'])
+              date=Seminar.find(event.message['text']).date
+              confirm_date('日程',messages,event,date)
+              
+            elsif !user.date_is then
+              case event.message['text']
+              when 'はい'
+                user.update!(date_is:true)
+                template("それでは次にお名前(漢字)を入力してください",messages,event)
+              when '修正する'
+                user.seminar_users.destroy_all
+                seminar_date(Seminar.all,messages,event)
+              else
+                template("「はい」か「修正する」でお答えください",messages,event)
+              end
               # 漢字名前入力の確認
             elsif user.name.nil? then
               user.update!(name:event.message['text'])

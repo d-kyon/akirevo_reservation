@@ -12,8 +12,8 @@ def create_seminar(hash)
 end
 
 for i in 1..30 do
-  date1=Time.local(2019,6,i,19,0,0,0).to_s
-  date2=Time.local(2019,6,i,23,30,0,0).to_s
-  create_seminar({title: '初回無料講座', date: date1, address: 'ラトゥール会議室', max: 10})
-  create_seminar({title: '初回無料講座', date: date2, address: 'ラトゥール会議室', max: 10})
+  date1=Time.local(2019,6,i,7,0,0,0).to_s
+  date2=Time.local(2019,6,i,15,30,0,0).to_s
+  create_seminar({title: '初回無料講座', date: date1, address: 'ラトゥール会議室', max: 2})
+  create_seminar({title: '初回無料講座', date: date2, address: 'ラトゥール会議室', max: 2})
 end
