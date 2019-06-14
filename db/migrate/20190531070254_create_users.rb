@@ -3,6 +3,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       #アカウント作成時の情報
       t.string "line_id"
+      t.boolean "date_is" , default: 0
       t.string "name"
       t.boolean "name_is" , default: 0
       t.string "name_kana"
@@ -15,6 +16,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.boolean "introduction_code_is" , default: 0
       t.text "self"
       t.boolean "self_is" , default: false
+      t.timestamps
     end
   end
 end
